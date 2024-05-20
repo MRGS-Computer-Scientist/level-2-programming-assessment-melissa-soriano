@@ -12,10 +12,15 @@ window=Tk()
 window.title("Cash Control")
 
 #size of window
-window.geometry("400x300")
+window.geometry("500x500")
+
+#set the background gradient
+
 
 #Logo
-
+logo_image = PhotoImage(file="Images/Logo.png")
+logo_label = Label(window, image=logo_image)
+logo_label.pack()
 
 #Username
 username_label = Label(window, text="Username: ")
