@@ -31,11 +31,11 @@ username_entry.pack()
 #Password
 password_label = Label(window, text="Password: ")
 password_label.pack()
-password_entry = Entry(window)
+password_entry = Entry(window, show="*")
 password_entry.pack()
 
 #Login Button
-login_button = Button(window,text="Login", command=login)
+login_button = Button(window,text="ENTER", command=login)
 login_button.pack()
 
 window.mainloop()
