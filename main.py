@@ -1,6 +1,6 @@
 from tkinter import*
 from app_settings import*
-from PIL import ImageTk, Image
+from PIL import ImageTk, Image # type: ignore #Import ImageTk and Image from PIL
 
 class App():
     
@@ -12,9 +12,13 @@ class App():
         #size of window
         self.window.geometry("1440x1024")
 
-        #Load and strech the background image
+        # Load and stretch the background image
         image = Image.open("Images/background.png")
         photo = ImageTk.PhotoImage(image.resize((1440, 1024)))
+
+        # Create a label for the background image
+        bg_label = Label(self.window, image=photo)
+        bg_label.place(x=0, y=0, relwidth=1, relheight=1)
          
         #Logo   
         logo_image = PhotoImage(file="Images/Logo.png")
