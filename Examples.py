@@ -20,4 +20,21 @@ hello_label.place(x=300, y=300)
 #hello_label = Label(text="Hello, World")
 #hello_label.pack(side="top")
 
+
+
+#image before stretch
+#Background gradient image
+        #bg_image = PhotoImage(file="Images/background.png")
+        #bg_label = Label(self.window, image=bg_image)
+        #bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+
+
+# size of window
+        #self.window.geometry("500x500")
+
+#when exiting
+#def exit(self):
+        #if messagebox.askquestion("askquestion", "Are you sure?"):
+            #self.window.destroy()
 window.mainloop()

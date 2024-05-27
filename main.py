@@ -1,5 +1,6 @@
 from tkinter import*
 from app_settings import*
+from PIL import ImageTk, Image
 
 class App():
     
@@ -9,8 +10,12 @@ class App():
         self.window.title("Cash Control")
 
         #size of window
-        self.window.geometry("500x500")
+        self.window.geometry("1440x1024")
 
+        #Load and strech the background image
+        image = Image.open("Images/background.png")
+        photo = ImageTk.PhotoImage(image.resize((1440, 1024)))
+         
         #Logo   
         logo_image = PhotoImage(file="Images/Logo.png")
         self.logo_label = Label(self.window, image=logo_image, bg="white")
