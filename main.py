@@ -58,6 +58,10 @@ class App():
     
         ####### MAIN PAGE #######
 
+        #Welcome message
+        welcome_message = "Welcome, " + username
+        self.welcome_label = Label(self.window, text=welcome_message, font=("Arial, 24"))
+        self.welcome_label.place(relx=0.5, rely=0.5, anchor=CENTER)
         
 
 #instance of my app
