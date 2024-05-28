@@ -77,7 +77,16 @@ class App():
         balance_message = "Your balance is $" + str(self.balance)
         self.balance_label = Label(self.window, text=balance_message, font=("Arial", 16))
         self.balance_label.place(relx=0.5, rely=0.6, anchor=CENTER)
-        
+
+        #Buttons
+        self.enter_allowance_button = Button(self.window, text="Enter Allowance", command=self.enter_allowance)
+        self.enter_allowance_button.place(relx=0.5, rely=0.7, anchor=CENTER)
+    
+    def enter_allowance(self):
+        #code to go to the next page for entering allowance
+        pass
+    
+
 
 #instance of my app
 app = App()
