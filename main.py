@@ -49,5 +49,16 @@ class App():
         print("Username: ", username)
         print("Password: ", password)
 
+        #Hide login widgets
+        self.username_label.place_forget()
+        self.username_entry.place_forget()
+        self.password_label.place_forget()
+        self.password_entry.place_forget()
+        self.login_button.place_forget()
+    
+        ####### MAIN PAGE #######
+
+        
+
 #instance of my app
 app = App()
