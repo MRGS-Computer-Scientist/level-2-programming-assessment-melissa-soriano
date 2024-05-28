@@ -81,11 +81,17 @@ class App():
         #Buttons
         self.enter_allowance_button = Button(self.window, text="Enter Allowance", command=self.enter_allowance)
         self.enter_allowance_button.place(relx=0.5, rely=0.7, anchor=CENTER)
-    
+
+        self.saving_button = Button(self.window, text="Saving", command=self.saving)
+        self.saving_button.place(relx=0.5, rely=0.77, anchor=CENTER)
+
     def enter_allowance(self):
         #code to go to the next page for entering allowance
         pass
     
+    def saving(self):
+        #code to go to the next page for entering saving
+        pass
 
 
 #instance of my app
