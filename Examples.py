@@ -28,7 +28,8 @@ hello_label.place(x=300, y=300)
         #bg_label = Label(self.window, image=bg_image)
         #bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
-
+#Initialize balance to 0
+        #self.balance = 0
 
 # size of window
         #self.window.geometry("500x500")

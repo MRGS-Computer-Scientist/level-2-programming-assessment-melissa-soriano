@@ -41,6 +41,9 @@ class App():
         self.login_button = Button(self.window,text="ENTER", command=self.login, bg="#CB997E")
         self.login_button.place(relx=0.5, rely=0.75, anchor=CENTER)
 
+        #Initialize balance to 0
+        self.balance = 0
+        
         self.window.mainloop()
     #Function to print username and password
     def login(self):
@@ -58,10 +61,22 @@ class App():
     
         ####### MAIN PAGE #######
 
+        #Resize and move the logo to left corner
+        logo_image = Image.open("Images/Logo.png").resize((209, 121))
+        logo_photo = ImageTk.PhotoImage(logo_image)
+        self.logo_label.config(image=logo_photo)
+        self.logo_label.image = logo_photo #keep a reference to avoid garbage collection
+        self.logo_label.place(relx=0.1, rely=0.1, anchor=NW)
+
         #Welcome message
         welcome_message = "Welcome, " + username
-        self.welcome_label = Label(self.window, text=welcome_message, font=("Arial, 24"))
+        self.welcome_label = Label(self.window, text=welcome_message, font=("Arial", 24))
         self.welcome_label.place(relx=0.5, rely=0.5, anchor=CENTER)
+
+        #Balance message
+        balance_message = "Your balance is $" + str(self.balance)
+        self.balance_label = Label(self.window, text=balance_message, font=("Arial", 16))
+        self.balance_label.place(relx=0.5, rely=0.6, anchor=CENTER)
         
 
 #instance of my app
