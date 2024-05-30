@@ -1,5 +1,6 @@
 from tkinter import*
 from app_settings import*
+from tkinter.ttk import Progressbar
 from PIL import ImageTk, Image # type: ignore #Import ImageTk and Image from PIL
 
 class App():
@@ -58,7 +59,22 @@ class App():
         self.password_label.place_forget()
         self.password_entry.place_forget()
         self.login_button.place_forget()
-    
+
+        #Create a loading bar
+        self.loading_bar = Progressbar(self.window, length=250, mode='indeterminate')
+        self.loading_bar.place(relx=0.5, rely=0.5, anchor=CENTER)
+
+        #Show loading bar
+        self.loading_bar.start()
+
+        #Simulate delay 
+        self.window.after(500, self.show_main_page)
+
+    def show_main_page(self):
+        #hide loading bar
+        self.loading_bar.stop()
+        self.loading_bar.place_forget()
+
         ####### MAIN PAGE #######
 
         #Resize and move the logo to left corner
@@ -69,7 +85,7 @@ class App():
         self.logo_label.place(relx=0.0, rely=0.0, anchor=NW)
 
         #Welcome message
-        welcome_message = "Welcome, " + username
+        welcome_message = "Welcome, " + self.username_entry.get()
         self.welcome_label = Label(self.window, text=welcome_message, font=("Arial", 50))
         self.welcome_label.place(relx=0.5, rely=0.3, anchor=CENTER)
 
