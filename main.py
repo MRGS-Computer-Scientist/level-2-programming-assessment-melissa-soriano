@@ -107,19 +107,36 @@ class App():
         self.track_button = Button(self.window, text="Track", command=self.track)
         self.track_button.place(relx=0.5, rely=0.7, anchor=CENTER)
 
+    def show_loading(self):
+        self.loading_bar = Progressbar(self.window, length=250, mode='indeterminate')
+        self.loading_bar.place(relx=0.5, rely=0.5, anchor=CENTER)
+        self.loading_bar.start()
+
+    def hide_loading(self):
+        self.loading_bar.stop()
+        self.loading_bar.place_forget()
+
     def enter_allowance(self):
+        self.show_loading()
+        self.window.after(1000, self.hide_loading)
         #code to go to the next page for entering allowance
         pass
     
     def saving(self):
+        self.show_loading()
+        self.window.after(1000, self.hide_loading)
         #code to go to the next page for entering saving
         pass
 
     def expense(self):
+        self.show_loading()
+        self.window.after(1000, self.hide_loading)
         #code to go to the next page for entering Expense page
         pass
 
     def track(self):
+        self.show_loading()
+        self.window.after(1000, self.hide_loading)
         #code to go to the next page
         pass
     
