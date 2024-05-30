@@ -10,7 +10,7 @@ class App():
         self.window.title("Cash Control")
 
         #size of window
-        self.window.geometry("1440x1024")
+        self.window.geometry("1000x1000")
 
         # Load and stretch the background image
         image = Image.open("Images/background.png")
@@ -89,7 +89,7 @@ class App():
         self.expense_button.place(relx=0.5, rely=0.64, anchor=CENTER)
 
         self.track_button = Button(self.window, text="Track", command=self.track)
-        self.track_button.place(relx=0.5, rely=0.70, anchor=CENTER)
+        self.track_button.place(relx=0.5, rely=0.7, anchor=CENTER)
 
     def enter_allowance(self):
         #code to go to the next page for entering allowance
