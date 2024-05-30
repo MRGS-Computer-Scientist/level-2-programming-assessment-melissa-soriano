@@ -14,7 +14,7 @@ class App():
 
         # Load and stretch the background image
         image = Image.open("Images/background.png")
-        photo = ImageTk.PhotoImage(image.resize((1440, 1024)))
+        photo = ImageTk.PhotoImage(image.resize((1000, 1000)))
 
         # Create a label for the background image
         bg_label = Label(self.window, image=photo)
@@ -66,7 +66,7 @@ class App():
         logo_photo = ImageTk.PhotoImage(logo_image)
         self.logo_label.config(image=logo_photo)
         self.logo_label.image = logo_photo #keep a reference to avoid garbage collection
-        self.logo_label.place(relx=0.1, rely=0.1, anchor=NW)
+        self.logo_label.place(relx=0.0, rely=0.0, anchor=NW)
 
         #Welcome message
         welcome_message = "Welcome, " + username

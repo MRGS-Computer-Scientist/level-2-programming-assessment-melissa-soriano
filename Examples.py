@@ -31,12 +31,7 @@ hello_label.place(x=300, y=300)
 #Initialize balance to 0
         #self.balance = 0
 
-#Resize and move the logo to left corner
-        #logo_image = Image.open("Images/Logo.png").resize((209, 121))
-        #logo_photo = ImageTk.PhotoImage(logo_image)
-        #self.logo_label.config(image=logo_photo)
-        #self.logo_label.image = logo_photo #keep a reference to avoid garbage collection
-        #self.logo_label.place(relx=0.0, rely=0.0, anchor=NW)
+
         
 # size of window
         #self.window.geometry("500x500")
