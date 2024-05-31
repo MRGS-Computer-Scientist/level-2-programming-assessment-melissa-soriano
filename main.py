@@ -86,25 +86,25 @@ class App():
 
         #Welcome message
         welcome_message = "Welcome, " + self.username_entry.get()
-        self.welcome_label = Label(self.window, text=welcome_message, font=("Arial", 50))
+        self.welcome_label = Label(self.window, text=welcome_message, font=("Arial", 50), bg="#caf0f8")
         self.welcome_label.place(relx=0.5, rely=0.3, anchor=CENTER)
 
         #Balance message
         balance_message = "Your balance is $" + str(self.balance)
-        self.balance_label = Label(self.window, text=balance_message, font=("Arial", 25))
+        self.balance_label = Label(self.window, text=balance_message, font=("Arial", 25), bg="#caf0f8")
         self.balance_label.place(relx=0.5, rely=0.42, anchor=CENTER)
 
         #Buttons
-        self.enter_allowance_button = Button(self.window, text="Enter Allowance", command=self.enter_allowance)
+        self.enter_allowance_button = Button(self.window, text="Enter Allowance", command=self.enter_allowance, bg="#ffb5a7")
         self.enter_allowance_button.place(relx=0.5, rely=0.52, anchor=CENTER)
 
-        self.saving_button = Button(self.window, text="Saving", command=self.saving)
+        self.saving_button = Button(self.window, text="Saving", command=self.saving, bg="#ffb4a2")
         self.saving_button.place(relx=0.5, rely=0.58, anchor=CENTER)
 
-        self.expense_button = Button(self.window, text="Expense", command=self.expense)
+        self.expense_button = Button(self.window, text="Expense", command=self.expense, bg="#ffb4a2")
         self.expense_button.place(relx=0.5, rely=0.64, anchor=CENTER)
 
-        self.track_button = Button(self.window, text="Track", command=self.track)
+        self.track_button = Button(self.window, text="Track", command=self.track, bg="#ffb4a2")
         self.track_button.place(relx=0.5, rely=0.7, anchor=CENTER)
 
     def show_loading(self):
