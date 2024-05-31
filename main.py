@@ -39,7 +39,7 @@ class App():
         self.password_entry.place(relx=0.5, rely=0.65, anchor=CENTER)
 
         #Login Button
-        self.login_button = Button(self.window,text="ENTER", command=self.login, bg="#CB997E")
+        self.login_button = Button(self.window,text="ENTER", command=self.login, bg="#70e000")
         self.login_button.place(relx=0.5, rely=0.75, anchor=CENTER)
 
         #Initialize balance to 0
