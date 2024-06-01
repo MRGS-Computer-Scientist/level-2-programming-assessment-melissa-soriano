@@ -1,6 +1,7 @@
 from tkinter import*
 from app_settings import*
 from tkinter.ttk import Progressbar
+from tkinter import messagebox
 from PIL import ImageTk, Image # type: ignore #Import ImageTk and Image from PIL
 
 class App():
@@ -110,6 +111,10 @@ class App():
         self.track_button = Button(self.window, text="Track", command=self.track, bg="#ffb4a2")
         self.track_button.place(relx=0.5, rely=0.7, anchor=CENTER)
 
+        #Logout Button
+        self.logout_button = Button(self.window, text="Logout", command=self.logout, bg="#ffb4a2")
+        self.logout_button.place(relx=0.9, rely=0.9, anchor=SE)
+
     def create_rounded_rectangle(self, widget):
         widget.config(bg="#caf0f8", relief="solid", bd=10, padx=10, pady=5, borderwidth=1, font=("Arial", 40))
         
@@ -145,6 +150,15 @@ class App():
         self.window.after(1000, self.hide_loading)
         #code to go to the next page
         pass
+
+    def logout(self):
+        if messagebox.askokcancel("Logout", "Are you sure you want to logout?"):
+            #reset UI or go back to login page
+            self.reset_ui()
+
+    def reset_ui(self):
+        #Resetting the UI (returning to the login page) 
+        print("Logging out....")       
     
 #instance of my app
 app = App()
