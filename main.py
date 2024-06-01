@@ -84,15 +84,18 @@ class App():
         self.logo_label.image = logo_photo #keep a reference to avoid garbage collection
         self.logo_label.place(relx=0.0, rely=0.0, anchor=NW)
 
-        #Welcome message
+        #Welcome message with rounded rectangle
         welcome_message = "Welcome, " + self.username_entry.get()
-        self.welcome_label = Label(self.window, text=welcome_message, font=("Arial", 50), bg="#caf0f8")
+        self.welcome_label = Label(self.window, text=welcome_message, font=("Arial", 50), bg="#caf0f8" )
         self.welcome_label.place(relx=0.5, rely=0.3, anchor=CENTER)
+        self.create_rounded_rectangle(self.welcome_label)
+        
 
         #Balance message
         balance_message = "Your balance is $" + str(self.balance)
         self.balance_label = Label(self.window, text=balance_message, font=("Arial", 25), bg="#caf0f8")
         self.balance_label.place(relx=0.5, rely=0.42, anchor=CENTER)
+        self.create_rounded_rectangle(self.balance_label)
 
         #Buttons
         self.enter_allowance_button = Button(self.window, text="Enter Allowance", command=self.enter_allowance, bg="#ffb5a7")
@@ -107,6 +110,9 @@ class App():
         self.track_button = Button(self.window, text="Track", command=self.track, bg="#ffb4a2")
         self.track_button.place(relx=0.5, rely=0.7, anchor=CENTER)
 
+    def create_rounded_rectangle(self, widget):
+        widget.config(bg="#caf0f8", relief="solid", bd=10, padx=10, pady=5, borderwidth=1, font=("Arial", 40))
+        
     def show_loading(self):
         self.loading_bar = Progressbar(self.window, length=250, mode='indeterminate')
         self.loading_bar.place(relx=0.5, rely=0.5, anchor=CENTER)
