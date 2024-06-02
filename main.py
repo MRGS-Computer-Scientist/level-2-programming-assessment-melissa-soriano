@@ -1,5 +1,5 @@
 from tkinter import*
-from app_settings import hide_main_page_widgets, place_logo 
+from app_settings import hide_main_page_widgets 
 from tkinter.ttk import Progressbar
 from tkinter import messagebox
 from PIL import ImageTk, Image # type: ignore #Import ImageTk and Image from PIL
@@ -16,10 +16,10 @@ class App():
 
         # Load and stretch the background image
         image = Image.open("Images/background.png")
-        photo = ImageTk.PhotoImage(image.resize((1000, 1000)))
+        self.photo = ImageTk.PhotoImage(image.resize((1000, 1000)))
 
         # Create a label for the background image
-        bg_label = Label(self.window, image=photo)
+        bg_label = Label(self.window, image=self.photo)
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
          
         #Logo   
@@ -114,6 +114,13 @@ class App():
         #Logout Button
         self.logout_button = Button(self.window, text="Logout", command=self.logout, bg="#ffb4a2")
         self.logout_button.place(relx=0.9, rely=0.9, anchor=SE)
+    def place_logo(self):
+        #Resize and move the logo to left corner
+        logo_image = Image.open("Images/Logo.png").resize((209, 121))
+        logo_photo = ImageTk.PhotoImage(logo_image)
+        self.logo_label.config(image=logo_photo)
+        self.logo_label.image = logo_photo #keep a reference to avoid garbage collection
+        self.logo_label.place(relx=0.0, rely=0.0, anchor=NW)
 
     def create_rounded_rectangle(self, widget):
         widget.config(bg="#caf0f8", relief="solid", bd=10, padx=10, pady=5, borderwidth=1, font=("Arial", 40))
@@ -128,15 +135,47 @@ class App():
         self.loading_bar.place_forget()
 
     def enter_allowance(self):
-        self.show_loading()
-        self.window.after(1000, self.hide_loading)
-        #Hide the main page widgets
+         #Hide the main page widgets
         hide_main_page_widgets(self)
 
-        #place logo
-        place_logo(self)
+        self.show_loading()
+        def show_widgets():
+            self.hide_loading()
+            #place logo
+            self.place_logo()
+
+            #Enter Allowance text
+            allowance_label = Label(self.window, text="Enter Allowance", font=("Arial", 50), bg="#caf0f8")
+            allowance_label.place(relx=0.5, rely=0.3, anchor=CENTER)
+
+            #Entry for typing allowance
+            self.allowance_entry = Entry(self.window, font=("Arial", 30), width=10)
+            self.allowance_entry.place(relx=0.5, rely=0.5, anchor=CENTER)
+
+            #Enter button
+            enter_button = Button(self.window, text="Enter", command=self.add_allowance, bg="#ffb5a7", font=("Arial", 20))
+            enter_button.place(relx=0.5, rely=0.6, anchor=CENTER)
+
+            #Exit button
+            exit_button = Button(self.window, text="Exit", command=self.show_main_page, bg="#ffb5a7", font=("Arial", 20))
+            exit_button.place(relx=0.5, rely=0.7, anchor=CENTER)   
         
+        #Schedule the display of the widgets after 1 second
+        self.window.after(1000, show_widgets)
     
+    def add_allowance(self):
+        #Get the entered allowance
+        allowance = float(self.allowance_entry.get())
+
+        #Add the allowanceto the current balance
+        self.balance += allowance
+
+        #Update the balance message
+        balance_message = "Your balance is $" + str(self.balance)
+        self.balance_label.config(text=balance_message)
+        #show a message bow to confirm the allowance was added
+        messagebox.showinfor("Allowance Added", "Allowance succesfully added!")
+
     def saving(self):
         self.show_loading()
         self.window.after(1000, self.hide_loading)
