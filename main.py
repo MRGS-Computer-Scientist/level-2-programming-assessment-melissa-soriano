@@ -165,8 +165,20 @@ class App():
     
     def add_allowance(self):
         #Get the entered allowance
-        allowance = float(self.allowance_entry.get())
-
+        allowance_str = self.allowance_entry.get()
+        if not allowance_str:
+            #If the entry field is empty, show an error message
+            messagebox.showerror("Error", "Please enter valid allowance")
+            return
+        
+        try:
+            allowance = float(allowance_str)
+            
+        except ValueError:
+            # If the input cannot be converted to a float, show an error message
+            messagebox.showerror("Error", "Please enter a valid number for allowance.")
+            return
+    
         #Add the allowanceto the current balance
         self.balance += allowance
 
@@ -174,7 +186,7 @@ class App():
         balance_message = "Your balance is $" + str(self.balance)
         self.balance_label.config(text=balance_message)
         #show a message bow to confirm the allowance was added
-        messagebox.showinfor("Allowance Added", "Allowance succesfully added!")
+        messagebox.showinfo("Allowance Added", "Allowance succesfully added!")
 
     def saving(self):
         self.show_loading()
