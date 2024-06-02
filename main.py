@@ -152,13 +152,26 @@ class App():
         pass
 
     def logout(self):
-        if messagebox.askokcancel("Logout", "Are you sure you want to logout?"):
-            #reset UI or go back to login page
-            self.reset_ui()
+       top = Toplevel(self.window)
+       top.title("Logout")
+       top.geometry("300x100")
+       top.resizable(False, False)
 
-    def reset_ui(self):
-        #Resetting the UI (returning to the login page) 
-        print("Logging out....")       
+       label = Label(top, text="Are you sure you want to logout?", padx=20, pady=10)
+       label.pack()
+
+       button_frame = Frame(top)
+       button_frame.pack(pady=10)
+
+       ok_button = Button(button_frame, text="Logout", bg="green", fg="white", padx=10, pady=5, command=lambda: self.confirm_logout(top))
+       ok_button.pack(side=LEFT, padx=10)
+
+       cancel_button = Button(button_frame, text="Cancel", bg="red", fg="white", padx=10, pady=5, command=top.destroy)
+       cancel_button.pack(side=RIGHT, padx=10)
+
+    def confirm_logout(self, top):
+        top.destroy()
+        self.window.destroy()
     
 #instance of my app
 app = App()
