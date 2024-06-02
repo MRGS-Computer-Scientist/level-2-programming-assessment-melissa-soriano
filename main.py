@@ -1,5 +1,5 @@
 from tkinter import*
-from app_settings import*
+from app_settings import hide_main_page_widgets, place_logo 
 from tkinter.ttk import Progressbar
 from tkinter import messagebox
 from PIL import ImageTk, Image # type: ignore #Import ImageTk and Image from PIL
@@ -130,8 +130,12 @@ class App():
     def enter_allowance(self):
         self.show_loading()
         self.window.after(1000, self.hide_loading)
-        #code to go to the next page for entering allowance
-        pass
+        #Hide the main page widgets
+        hide_main_page_widgets(self)
+
+        #place logo
+        place_logo(self)
+        
     
     def saving(self):
         self.show_loading()
