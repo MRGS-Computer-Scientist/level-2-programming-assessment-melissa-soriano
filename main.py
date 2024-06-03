@@ -51,9 +51,21 @@ class App():
     def login(self):
         username = self.username_entry.get()
         password = self.password_entry.get()
+
+        #To check if the username meets the length requirements
+        if len(username)< 3 or len(username)> 25:
+            messagebox.showerror("Error", "Username must be between 3 and 25 characters.")
+            return
+        
+        #To check if password meets the length requirements
+        if len(password) < 5 or len(password) > 20:
+            messagebox.showerror("Error", "Passwordmust be between 5 and 20 characters.")
+            return
+        
         print("Username: ", username)
         print("Password: ", password)
-
+            
+    
         #Hide login widgets
         self.username_label.place_forget()
         self.username_entry.place_forget()
