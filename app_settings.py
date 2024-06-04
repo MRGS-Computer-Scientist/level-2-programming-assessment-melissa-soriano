@@ -10,8 +10,13 @@ def hide_main_page_widgets(self):
     self.track_button.place_forget()
     self.logout_button.place_forget()
 
-
-    def place_logo(self):
+def hide_enter_allowance_widgets(app):
+      app.allowance_label.place_forget()
+      app.allowance_entry.place_forget()
+      app.enter_button.place_forget()
+      app.exit_button.place_forget()
+    
+def place_logo(self):
         pass
         
     

@@ -1,5 +1,5 @@
 from tkinter import*
-from app_settings import hide_main_page_widgets 
+from app_settings import hide_main_page_widgets, hide_enter_allowance_widgets
 from tkinter.ttk import Progressbar
 from tkinter import messagebox
 from PIL import ImageTk, Image # type: ignore #Import ImageTk and Image from PIL
@@ -61,7 +61,7 @@ class App():
         if len(password) < 5 or len(password) > 20:
             messagebox.showerror("Error", "Passwordmust be between 5 and 20 characters.")
             return
-        
+            
         print("Username: ", username)
         print("Password: ", password)
             
@@ -149,7 +149,7 @@ class App():
     def enter_allowance(self):
          #Hide the main page widgets
         hide_main_page_widgets(self)
-
+        
         self.show_loading()
         def show_widgets():
             self.hide_loading()
@@ -157,24 +157,31 @@ class App():
             self.place_logo()
 
             #Enter Allowance text
-            allowance_label = Label(self.window, text="Enter Allowance", font=("Arial", 50), bg="#caf0f8")
-            allowance_label.place(relx=0.5, rely=0.3, anchor=CENTER)
+            self.allowance_label = Label(self.window, text="Enter Allowance", font=("Arial", 50), bg="#caf0f8")
+            self.allowance_label.place(relx=0.5, rely=0.3, anchor=CENTER)
 
             #Entry for typing allowance
             self.allowance_entry = Entry(self.window, font=("Arial", 30), width=10)
             self.allowance_entry.place(relx=0.5, rely=0.5, anchor=CENTER)
 
             #Enter button
-            enter_button = Button(self.window, text="Enter", command=self.add_allowance, bg="#ffb5a7", font=("Arial", 20))
-            enter_button.place(relx=0.5, rely=0.6, anchor=CENTER)
+            self.enter_button = Button(self.window, text="Enter", command=self.add_allowance, bg="#ffb5a7", font=("Arial", 20))
+            self.enter_button.place(relx=0.5, rely=0.6, anchor=CENTER)
 
             #Exit button
-            exit_button = Button(self.window, text="Exit", command=self.show_main_page, bg="#ffb5a7", font=("Arial", 20))
-            exit_button.place(relx=0.5, rely=0.7, anchor=CENTER)   
-        
+            self.exit_button = Button(self.window, text="Exit", command=lambda: [self.show_main_page(), hide_enter_allowance_widgets(self)], bg="#ffb5a7", font=("Arial", 20))
+            self.exit_button.place(relx=0.5, rely=0.7, anchor=CENTER)   
+            
         #Schedule the display of the widgets after 1 second
         self.window.after(1000, show_widgets)
+
+        
+            
+
+        
+        
     
+
     def add_allowance(self):
         #Get the entered allowance
         allowance_str = self.allowance_entry.get()
