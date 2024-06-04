@@ -165,22 +165,16 @@ class App():
             self.allowance_entry.place(relx=0.5, rely=0.5, anchor=CENTER)
 
             #Enter button
-            self.enter_button = Button(self.window, text="Enter", command=self.add_allowance, bg="#ffb5a7", font=("Arial", 20))
+            self.enter_button = Button(self.window, text="Enter", command=self.add_allowance, bg="#70e000", font=("Arial", 20))
             self.enter_button.place(relx=0.5, rely=0.6, anchor=CENTER)
 
             #Exit button
-            self.exit_button = Button(self.window, text="Exit", command=lambda: [self.show_main_page(), hide_enter_allowance_widgets(self)], bg="#ffb5a7", font=("Arial", 20))
+            self.exit_button = Button(self.window, text="Exit", command=lambda: [self.show_main_page(), hide_enter_allowance_widgets(self)], bg="red", font=("Arial", 20))
             self.exit_button.place(relx=0.5, rely=0.7, anchor=CENTER)   
             
         #Schedule the display of the widgets after 1 second
         self.window.after(1000, show_widgets)
 
-        
-            
-
-        
-        
-    
 
     def add_allowance(self):
         #Get the entered allowance
