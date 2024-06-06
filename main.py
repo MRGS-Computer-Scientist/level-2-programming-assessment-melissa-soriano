@@ -126,6 +126,7 @@ class App():
         #Logout Button
         self.logout_button = Button(self.window, text="Logout", command=self.logout, bg="#ffb4a2")
         self.logout_button.place(relx=0.9, rely=0.9, anchor=SE)
+        
     def place_logo(self):
         #Resize and move the logo to left corner
         logo_image = Image.open("Images/Logo.png").resize((209, 121))
@@ -199,13 +200,20 @@ class App():
         balance_message = "Your balance is $" + str(self.balance)
         self.balance_label.config(text=balance_message)
         #show a message bow to confirm the allowance was added
-        messagebox.showinfo("Allowance Added", "Allowance succesfully added!")
+        messagebox.showinfo("Allowance Added", "Allowance successfully added!")
 
     def saving(self):
+        #Hide the main page widgets
+        hide_main_page_widgets(self)
+
         self.show_loading()
-        self.window.after(1000, self.hide_loading)
-        #code to go to the next page for entering saving
-        pass
+        def show_saving_widgets():
+            self.hide_loading()
+            #Code to place logo
+            self.place_logo()
+
+        #Schedule the display of the window after 1 second
+        self.window.after(1000, show_saving_widgets)
 
     def expense(self):
         self.show_loading()

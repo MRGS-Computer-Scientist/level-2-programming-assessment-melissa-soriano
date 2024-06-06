@@ -16,6 +16,7 @@ def hide_enter_allowance_widgets(app):
       app.enter_button.place_forget()
       app.exit_button.place_forget()
     
+
 def place_logo(self):
         pass
         
