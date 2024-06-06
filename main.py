@@ -212,6 +212,10 @@ class App():
             #Code to place logo
             self.place_logo()
 
+            #Savings title
+            savings_title = Label(self.window, text="Savings", font=("Arial", 50), bg="#caf0f8")
+            savings_title.place(relx=0.5, rely=0.3, anchor=CENTER)
+            
         #Schedule the display of the window after 1 second
         self.window.after(1000, show_saving_widgets)
 
