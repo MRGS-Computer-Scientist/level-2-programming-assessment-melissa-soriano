@@ -1,5 +1,5 @@
 from tkinter import*
-from app_settings import hide_main_page_widgets, hide_enter_allowance_widgets, CustomMessageBox
+from app_settings import hide_main_page_widgets, hide_enter_allowance_widgets, CustomMessageBox, hide_enter_savings_widgets
 from tkinter.ttk import Progressbar
 from PIL import ImageTk, Image # type: ignore #Import ImageTk and Image from PIL
 
@@ -199,7 +199,7 @@ class App():
         balance_message = "Your balance is $" + str(self.balance)
         self.balance_label.config(text=balance_message)
         #show a message bow to confirm the allowance was added
-        CustomMessageBox("Allowance Added", "Allowance successfully added!")
+        CustomMessageBox(self.window, "Allowance Added", "Allowance successfully added!")
 
     def saving(self):
         #Hide the main page widgets
@@ -227,15 +227,20 @@ class App():
             #Enter Button
             self.enter_savings_button = Button(self.window, text="Enter", command=self.add_savings, bg="#70e000", font=("Arial", 20))
             self.enter_savings_button.place(relx=0.5, rely=0.6, anchor=CENTER)
-            
+
+            #Exit Button
+            self.exit_savings_button = Button(self.window, text="Exit", command=lambda: [self.show_main_page(), hide_enter_savings_widgets(self)], bg="red", font=("Arial", 20))
+            self.exit_button.place(relx=0.5, rely=0.7, anchor=CENTER)
+
         #Schedule the display of the window after 1 second
         self.window.after(1000, show_saving_widgets)
+        
     def add_savings(self):
         #Get the entered savings
         savings_str = self.savings_entry.get()
         if not savings_str:
             #If the entry field is empty, show an error message
-            CustomMessageBox("Error", "Please enter valid savings")
+            CustomMessageBox(self.window, "Error", "Please enter valid savings")
             return
         
         try:
@@ -243,7 +248,7 @@ class App():
         
         except ValueError:
             #If input cannot be  converted to a float, show an error message
-            CustomMessageBox("Error", "Please enter a valid number for savings.")
+            CustomMessageBox(self.window, "Error", "Please enter a valid number for savings.")
             return
         
     def expense(self):

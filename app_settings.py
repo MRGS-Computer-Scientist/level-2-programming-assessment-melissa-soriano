@@ -32,7 +32,13 @@ def hide_enter_allowance_widgets(app):
       app.enter_button.place_forget()
       app.exit_button.place_forget()
     
-
+def hide_enter_savings_widgets(app):
+      app.savings_title.place_forget()
+      app.current_saving_message.place_forget()
+      app.savings_entry.place_forget()
+      app.enter_savings_button.place_forget()
+      app.exit_savings_button.place_forget()
+      
 def place_logo(self):
         pass
         
