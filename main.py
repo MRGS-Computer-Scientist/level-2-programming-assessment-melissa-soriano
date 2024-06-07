@@ -224,6 +224,9 @@ class App():
             self.savings_entry = Entry(self.window, font=("Arial", 30), width=10)
             self.savings_entry.place(relx=0.5, rely=0.5, anchor=CENTER)
 
+            #Enter Button
+            self.enter_savings_button = Button(self.window, text="Enter", command=self.add_savings, bg="#70e000", font=("Arial", 20))
+            self.enter_savings_button.place(relx=0.5, rely=0.6, anchor=CENTER)
             
         #Schedule the display of the window after 1 second
         self.window.after(1000, show_saving_widgets)
