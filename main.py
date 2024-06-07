@@ -44,7 +44,8 @@ class App():
 
         #Initialize balance to 0
         self.balance = 0
-        
+        self.savings= 0 
+
         self.window.mainloop()
     #Function to print username and password
     def login(self):
@@ -212,13 +213,13 @@ class App():
             self.place_logo()
 
             #Savings title
-            savings_title = Label(self.window, text="Savings", font=("Arial", 50), bg="#caf0f8")
-            savings_title.place(relx=0.5, rely=0.3, anchor=CENTER)
+            self.savings_title = Label(self.window, text="Savings", font=("Arial", 50), bg="#caf0f8")
+            self.savings_title.place(relx=0.5, rely=0.3, anchor=CENTER)
 
             #Current savings message
-            current_saving_message = "Your current savings is $" + str(self.balance)
-            current_saving_message = Label(self.window, text=current_saving_message, font=("Arial", 25), bg="#caf0f8")
-            current_saving_message.place(relx=0.5, rely=0.4, anchor=CENTER)
+            current_saving_message = "Your current savings is $" + str(self.savings)
+            self.current_saving_message = Label(self.window, text=current_saving_message, font=("Arial", 25), bg="#caf0f8")
+            self.current_saving_message.place(relx=0.5, rely=0.4, anchor=CENTER)
 
             #Entry for typing savings
             self.savings_entry = Entry(self.window, font=("Arial", 30), width=10)
@@ -230,11 +231,11 @@ class App():
 
             #Exit Button
             self.exit_savings_button = Button(self.window, text="Exit", command=lambda: [self.show_main_page(), hide_enter_savings_widgets(self)], bg="red", font=("Arial", 20))
-            self.exit_button.place(relx=0.5, rely=0.7, anchor=CENTER)
+            self.exit_savings_button.place(relx=0.5, rely=0.7, anchor=CENTER)
 
         #Schedule the display of the window after 1 second
         self.window.after(1000, show_saving_widgets)
-        
+
     def add_savings(self):
         #Get the entered savings
         savings_str = self.savings_entry.get()
@@ -251,6 +252,16 @@ class App():
             CustomMessageBox(self.window, "Error", "Please enter a valid number for savings.")
             return
         
+        #Add the savings to the currect savings
+        self.savings += savings
+
+        #Update the savings message
+        current_saving_message = "Your current savings is $" + str(self.savings)
+        self.current_saving_message.config(text=current_saving_message)
+
+        #To show a message to tell that the savings was added
+        CustomMessageBox(self.window, "Savings Added", "Savings is successfully added!")
+
     def expense(self):
         self.show_loading()
         self.window.after(1000, self.hide_loading)
