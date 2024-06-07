@@ -215,7 +215,12 @@ class App():
             savings_title = Label(self.window, text="Savings", font=("Arial", 50), bg="#caf0f8")
             savings_title.place(relx=0.5, rely=0.3, anchor=CENTER)
 
-            
+            #Current savings message
+            current_saving_message = "Your current savings is $" + str(self.balance)
+            current_saving_message = Label(self.window, text=current_saving_message, font=("Arial", 25), bg="#caf0f8")
+            current_saving_message.place(relx=0.5, rely=0.4, anchor=CENTER)
+
+            #Entry for typing savings
             
         #Schedule the display of the window after 1 second
         self.window.after(1000, show_saving_widgets)
