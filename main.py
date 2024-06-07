@@ -223,10 +223,26 @@ class App():
             #Entry for typing savings
             self.savings_entry = Entry(self.window, font=("Arial", 30), width=10)
             self.savings_entry.place(relx=0.5, rely=0.5, anchor=CENTER)
+
             
         #Schedule the display of the window after 1 second
         self.window.after(1000, show_saving_widgets)
-
+    def add_savings(self):
+        #Get the entered savings
+        savings_str = self.savings_entry.get()
+        if not savings_str:
+            #If the entry field is empty, show an error message
+            CustomMessageBox("Error", "Please enter valid savings")
+            return
+        
+        try:
+            savings = float(savings_str)
+        
+        except ValueError:
+            #If input cannot be  converted to a float, show an error message
+            CustomMessageBox("Error", "Please enter a valid number for savings.")
+            return
+        
     def expense(self):
         self.show_loading()
         self.window.after(1000, self.hide_loading)
