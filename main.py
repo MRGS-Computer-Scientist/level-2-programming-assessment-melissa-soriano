@@ -221,6 +221,8 @@ class App():
             current_saving_message.place(relx=0.5, rely=0.4, anchor=CENTER)
 
             #Entry for typing savings
+            self.savings_entry = Entry(self.window, font=("Arial", 30), width=10)
+            self.savings_entry.place(relx=0.5, rely=0.5, anchor=CENTER)
             
         #Schedule the display of the window after 1 second
         self.window.after(1000, show_saving_widgets)
