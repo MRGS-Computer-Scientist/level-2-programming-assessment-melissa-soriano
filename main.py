@@ -1,7 +1,6 @@
 from tkinter import*
-from app_settings import hide_main_page_widgets, hide_enter_allowance_widgets
+from app_settings import hide_main_page_widgets, hide_enter_allowance_widgets, CustomMessageBox
 from tkinter.ttk import Progressbar
-from tkinter import messagebox
 from PIL import ImageTk, Image # type: ignore #Import ImageTk and Image from PIL
 
 class App():
@@ -54,12 +53,12 @@ class App():
 
         #To check if the username meets the length requirements
         if len(username)< 3 or len(username)> 25:
-            messagebox.showerror("Error", "Username must be between 3 and 25 characters.")
+            CustomMessageBox(self.window, "Error", "Username must be between 3 and 25 characters.")
             return
         
         #To check if password meets the length requirements
         if len(password) < 5 or len(password) > 20:
-            messagebox.showerror("Error", "Passwordmust be between 5 and 20 characters.")
+            CustomMessageBox(self.window, "Error", "Password must be between 5 and 20 characters.")
             return
             
         print("Username: ", username)
@@ -182,7 +181,7 @@ class App():
         allowance_str = self.allowance_entry.get()
         if not allowance_str:
             #If the entry field is empty, show an error message
-            messagebox.showerror("Error", "Please enter valid allowance")
+            CustomMessageBox(self.window, "Error", "Please enter valid allowance")
             return
         
         try:
@@ -190,7 +189,7 @@ class App():
             
         except ValueError:
             # If the input cannot be converted to a float, show an error message
-            messagebox.showerror("Error", "Please enter a valid number for allowance.")
+            CustomMessageBox(self.window, "Error", "Please enter a valid number for allowance.")
             return
     
         #Add the allowanceto the current balance
@@ -200,7 +199,7 @@ class App():
         balance_message = "Your balance is $" + str(self.balance)
         self.balance_label.config(text=balance_message)
         #show a message bow to confirm the allowance was added
-        messagebox.showinfo("Allowance Added", "Allowance successfully added!")
+        CustomMessageBox("Allowance Added", "Allowance successfully added!")
 
     def saving(self):
         #Hide the main page widgets
@@ -215,6 +214,8 @@ class App():
             #Savings title
             savings_title = Label(self.window, text="Savings", font=("Arial", 50), bg="#caf0f8")
             savings_title.place(relx=0.5, rely=0.3, anchor=CENTER)
+
+            
             
         #Schedule the display of the window after 1 second
         self.window.after(1000, show_saving_widgets)

@@ -1,5 +1,21 @@
+from email import message
 from tkinter import NW
+from tkinter import Toplevel, Label, Button
 
+
+class CustomMessageBox(Toplevel):
+            
+      def __init__(self, parent, title, message):
+            super().__init__(parent)
+            self.title(title)
+            self.geometry("500x150")
+            self.resizable(False, False)
+
+            label = Label(self, text=message, padx=20, pady=10, font=("Great Vibes", 15))
+            label.pack(pady=10)
+                  
+            ok_button = Button(self, text="OK", bg="green", fg="white", command=self.destroy, width=5, height=1)
+            ok_button.pack(pady=5)
 
 def hide_main_page_widgets(self):
     self.welcome_label.place_forget()
