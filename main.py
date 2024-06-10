@@ -283,10 +283,38 @@ class App():
             #Enter button
             self.enter_button = Button(self.window, text="Enter",command=self.add_expense, bg="#70e000", font=("Arial", 20))
             self.enter_button.place(relx=0.5, rely=0.6, anchor=CENTER)
-            
+
         #Schedule the display of the widgets after 1 Second
         self.window.after(1000, expense_widgets)
 
+    def add_expense(self):
+        #Get the entered expense
+        expense_str = self.expense_entry.get()
+        if not expense_str:
+            #if the entry field is empty, show an error message
+            CustomMessageBox(self.window, "Error", "Please enter valid expense")
+            return
+        
+        try:
+            expense = float(expense_str)
+
+        except ValueError:
+            #if the input cannot be converted to a float, it will show an error
+            CustomMessageBox(self.window, "Error", "Please enter a valid number for expense.")
+            return
+        
+        #Subtract the expense from the current balance
+        self.balance -= expense
+
+        #Update the balance message in the main page
+        self.balance_label.config(text="Your balance is $" + str(self.balance))
+
+        #Clear the entry field
+        self.expense_entry.delete(0, END)
+
+        #Show succes message
+        CustomMessageBox(self.window, "Success", "Expense subtracted successfully!")
+        
     def track(self):
         self.show_loading()
         self.window.after(1000, self.hide_loading)
