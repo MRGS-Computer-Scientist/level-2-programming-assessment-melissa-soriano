@@ -271,9 +271,13 @@ class App():
             self.hide_loading()
             #place logo
             self.place_logo()
+
+            #Expense title
+            self.expense_label = Label(self.window, text="Expense", font=("Arial", 50), bg="#caf0f8")
+            self.expense_label.place(relx=0.5, rely=0.3, anchor=CENTER)
             
         #Schedule the display of the widgets after 1 Second
-        self.window.after(10000, expense_widgets)
+        self.window.after(1000, expense_widgets)
 
     def track(self):
         self.show_loading()
