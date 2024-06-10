@@ -263,10 +263,17 @@ class App():
         CustomMessageBox(self.window, "Savings Added", "Savings is successfully added!")
 
     def expense(self):
+        #To Hide the main page widgets
+        hide_main_page_widgets(self)
+
         self.show_loading()
-        self.window.after(1000, self.hide_loading)
-        #code to go to the next page for entering Expense page
-        pass
+        def expense_widgets():
+            self.hide_loading()
+            #place logo
+            self.place_logo()
+            
+        #Schedule the display of the widgets after 1 Second
+        self.window.after(10000, expense_widgets)
 
     def track(self):
         self.show_loading()
