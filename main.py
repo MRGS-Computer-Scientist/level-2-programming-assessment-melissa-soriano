@@ -279,6 +279,10 @@ class App():
             #Entry for typing expense
             self.expense_entry = Entry(self.window, font=("Arial", 30), width=10)
             self.expense_entry.place(relx=0.5, rely=0.5, anchor=CENTER)
+
+            #Enter button
+            self.enter_button = Button(self.window, text="Enter",command=self.add_expense, bg="#70e000", font=("Arial", 20))
+            self.enter_button.place(relx=0.5, rely=0.6, anchor=CENTER)
             
         #Schedule the display of the widgets after 1 Second
         self.window.after(1000, expense_widgets)
