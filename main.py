@@ -275,6 +275,10 @@ class App():
             #Expense title
             self.expense_label = Label(self.window, text="Expense", font=("Arial", 50), bg="#caf0f8")
             self.expense_label.place(relx=0.5, rely=0.3, anchor=CENTER)
+
+            #Entry for typing expense
+            self.expense_entry = Entry(self.window, font=("Arial", 30), width=10)
+            self.expense_entry.place(relx=0.5, rely=0.5, anchor=CENTER)
             
         #Schedule the display of the widgets after 1 Second
         self.window.after(1000, expense_widgets)
