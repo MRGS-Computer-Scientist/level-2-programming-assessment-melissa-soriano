@@ -259,6 +259,9 @@ class App():
         current_saving_message = "Your current savings is $" + str(self.savings)
         self.current_saving_message.config(text=current_saving_message)
 
+        #Clear the entry field
+        self.savings_entry.delete(0, END)
+
         #To show a message to tell that the savings was added
         CustomMessageBox(self.window, "Savings Added", "Savings is successfully added!")
 
@@ -287,7 +290,7 @@ class App():
             #Exit button
             self.exit_button = Button(self.window, text="Exit", command=lambda: [self.show_main_page(), hide_expense_widgets(self)], bg="red", font=("Arial", 20))
             self.exit_button.place(relx=0.5, rely=0.7, anchor=CENTER)
-            
+
         #Schedule the display of the widgets after 1 Second
         self.window.after(1000, expense_widgets)
 
