@@ -284,6 +284,8 @@ class App():
             self.enter_button = Button(self.window, text="Enter",command=self.add_expense, bg="#70e000", font=("Arial", 20))
             self.enter_button.place(relx=0.5, rely=0.6, anchor=CENTER)
 
+            #Exit button
+            
         #Schedule the display of the widgets after 1 Second
         self.window.after(1000, expense_widgets)
 
@@ -314,7 +316,7 @@ class App():
 
         #Show succes message
         CustomMessageBox(self.window, "Success", "Expense subtracted successfully!")
-        
+
     def track(self):
         self.show_loading()
         self.window.after(1000, self.hide_loading)
