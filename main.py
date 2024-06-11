@@ -1,5 +1,5 @@
 from tkinter import*
-from app_settings import hide_main_page_widgets, hide_enter_allowance_widgets, CustomMessageBox, hide_enter_savings_widgets
+from app_settings import hide_main_page_widgets, hide_enter_allowance_widgets, CustomMessageBox, hide_enter_savings_widgets, hide_expense_widgets
 from tkinter.ttk import Progressbar
 from PIL import ImageTk, Image # type: ignore #Import ImageTk and Image from PIL
 
@@ -285,6 +285,8 @@ class App():
             self.enter_button.place(relx=0.5, rely=0.6, anchor=CENTER)
 
             #Exit button
+            self.exit_button = Button(self.window, text="Exit", command=lambda: [self.show_main_page(), hide_expense_widgets(self)], bg="red", font=("Arial", 20))
+            self.exit_button.place(relx=0.5, rely=0.7, anchor=CENTER)
             
         #Schedule the display of the widgets after 1 Second
         self.window.after(1000, expense_widgets)
