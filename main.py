@@ -347,6 +347,10 @@ class App():
             self.transaction_label = Label(self.window, text=transactions_text, font=("Arial", 50), bg="#caf0f8")
             self.transaction_label.place(relx=0.5, rely=0.3, anchor=CENTER)
 
+            #Placeholder for transactions
+            self.transactions_list = Listbox(self.window, font=("Arial", 20), width=50, height=10)
+            self.transactions_list.place(relx=0.5, rely=0.5, anchor=CENTER)
+            
         #Schedule the display of the widgets  after 1 second
         self.window.after(1000, show_track_widgets)
 
