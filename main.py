@@ -323,10 +323,17 @@ class App():
         CustomMessageBox(self.window, "Success", "Expense subtracted successfully!")
 
     def track(self):
+        #Hide the main page widgets
+        hide_main_page_widgets(self)
+
         self.show_loading()
-        self.window.after(1000, self.hide_loading)
-        #code to go to the next page
-        pass
+        
+        def show_track_widgets():
+            self.hide_loading()
+
+            
+        #Schedule the display of the widgets  after 1 second
+        self.window.after(1000, show_track_widgets)
 
     def logout(self):
        top = Toplevel(self.window)
