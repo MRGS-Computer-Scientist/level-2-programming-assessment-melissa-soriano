@@ -331,7 +331,22 @@ class App():
         def show_track_widgets():
             self.hide_loading()
 
-            
+            #To place logo
+            self.place_logo()
+
+            #Example transaction
+            transaction = []
+
+            #set the label text based on the number of transaction
+            if len(transaction) == 1:
+                transactions_text = "Transaction"
+            else:
+                transactions_text = "Transactions"
+
+            #Transaction text
+            self.transaction_label = Label(self.window, text=transactions_text, font=("Arial", 50), bg="#caf0f8")
+            self.transaction_label.place(relx=0.5, rely=0.3, anchor=CENTER)
+
         #Schedule the display of the widgets  after 1 second
         self.window.after(1000, show_track_widgets)
 
