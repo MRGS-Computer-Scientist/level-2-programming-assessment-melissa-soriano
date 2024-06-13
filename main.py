@@ -46,6 +46,9 @@ class App():
         self.balance = 0
         self.savings= 0 
 
+        #List to store transactions
+        self.transactions = []
+
         self.window.mainloop()
     #Function to print username and password
     def login(self):
@@ -192,9 +195,12 @@ class App():
             # If the input cannot be converted to a float, show an error message
             CustomMessageBox(self.window, "Error", "Please enter a valid number for allowance.")
             return
-    
+
+        #Code to update the balance and transaction list
         #Add the allowanceto the current balance
         self.balance += allowance
+        self.transactions.append(f"Allowance: +${allowance}")
+
 
         #Update the balance message
         balance_message = "Your balance is $" + str(self.balance)
@@ -252,8 +258,10 @@ class App():
             CustomMessageBox(self.window, "Error", "Please enter a valid number for savings.")
             return
         
+        #Codes to update the savings and transactions list
         #Add the savings to the currect savings
         self.savings += savings
+        self.transactions.append(f"Savings: +={savings}")
 
         #Update the savings message
         current_saving_message = "Your current savings is $" + str(self.savings)
@@ -310,8 +318,10 @@ class App():
             CustomMessageBox(self.window, "Error", "Please enter a valid number for expense.")
             return
         
+        #Codes to update balance and transaction list
         #Subtract the expense from the current balance
         self.balance -= expense
+        self.transactions.append(f"Expense: -${expense}")
 
         #Update the balance message in the main page
         self.balance_label.config(text="Your balance is $" + str(self.balance))
@@ -334,11 +344,8 @@ class App():
             #To place logo
             self.place_logo()
 
-            #Example transaction
-            transaction = []
-
             #set the label text based on the number of transaction
-            if len(transaction) == 1:
+            if len(self.transactions) == 1:
                 transactions_text = "Transaction"
             else:
                 transactions_text = "Transactions"
@@ -348,9 +355,13 @@ class App():
             self.transaction_label.place(relx=0.5, rely=0.3, anchor=CENTER)
 
             #Placeholder for transactions
-            self.transactions_list = Listbox(self.window, font=("Arial", 20), width=50, height=10)
+            self.transactions_list = Listbox(self.window, font=("Arial", 20), width=15, height=10)
             self.transactions_list.place(relx=0.5, rely=0.5, anchor=CENTER)
-            
+
+            #Add transaction to the listbox
+            for transaction in self.transactions:
+                self.transactions_list.insert(END, transaction)
+                
         #Schedule the display of the widgets  after 1 second
         self.window.after(1000, show_track_widgets)
 
