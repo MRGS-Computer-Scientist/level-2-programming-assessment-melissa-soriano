@@ -44,6 +44,11 @@ def hide_expense_widgets(app):
       app.expense_entry.place_forget()
       app.enter_button.place_forget()
       app.exit_button.place_forget()
+
+def hide_track_widgets(app):
+      app.transaction_label.place_forget()
+      app.transactions_list.place_forget()
+      app.exit_button.place_forget()
       
 def place_logo(self):
         pass
