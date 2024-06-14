@@ -26,71 +26,142 @@ class App():
         self.logo_label = Label(self.window, image=logo_image, bg="white")
         self.logo_label.place(relx=0.5, rely=0.3, anchor=CENTER)
 
-        #Username
+        # Login and Sign Up buttons
+        self.login_button = Button(self.window, text="Login", command=self.show_login_interface, bg="#70e000")
+        self.login_button.place(relx=0.4, rely=0.55, anchor=CENTER)
+        
+        self.signup_button = Button(self.window, text="Sign Up", command=self.show_signup_interface, bg="#70e000")
+        self.signup_button.place(relx=0.6, rely=0.55, anchor=CENTER)
+        
+        # Initialize balance to 0
+        self.balance = 0
+        self.savings = 0
+
+        # List to store transactions
+        self.transactions = []
+
+        self.window.mainloop()
+
+    def show_login_interface(self):
+        # Hide the initial buttons
+        self.login_button.place_forget()
+        self.signup_button.place_forget()
+        
+        # Username
         self.username_label = Label(self.window, text="Username: ")
         self.username_label.place(relx=0.5, rely=0.5, anchor=CENTER)
         self.username_entry = Entry(self.window)
         self.username_entry.place(relx=0.5, rely=0.55, anchor=CENTER)
-
-        #Password
+        
+        # Password
         self.password_label = Label(self.window, text="Password: ")
         self.password_label.place(relx=0.5, rely=0.6, anchor=CENTER)
         self.password_entry = Entry(self.window, show="*")
         self.password_entry.place(relx=0.5, rely=0.65, anchor=CENTER)
-
-        #Login Button
-        self.login_button = Button(self.window,text="ENTER", command=self.login, bg="#70e000")
+        
+        # Login Button
+        self.login_button = Button(self.window, text="ENTER", command=self.login, bg="#70e000")
         self.login_button.place(relx=0.5, rely=0.75, anchor=CENTER)
-
-        #Initialize balance to 0
-        self.balance = 0
-        self.savings= 0 
-
-        #List to store transactions
-        self.transactions = []
-
-        self.window.mainloop()
-    #Function to print username and password
-    def login(self):
-        username = self.username_entry.get()
-        password = self.password_entry.get()
-
-        #To check if the username meets the length requirements
-        if len(username)< 3 or len(username)> 25:
+        
+    def show_signup_interface(self):
+        # Hide the initial buttons
+        self.login_button.place_forget()
+        self.signup_button.place_forget()
+        
+        # Username
+        self.signup_username_label = Label(self.window, text="Username: ")
+        self.signup_username_label.place(relx=0.5, rely=0.5, anchor=CENTER)
+        self.signup_username_entry = Entry(self.window)
+        self.signup_username_entry.place(relx=0.5, rely=0.55, anchor=CENTER)
+        
+        # Password
+        self.signup_password_label = Label(self.window, text="Password: ")
+        self.signup_password_label.place(relx=0.5, rely=0.6, anchor=CENTER)
+        self.signup_password_entry = Entry(self.window, show="*")
+        self.signup_password_entry.place(relx=0.5, rely=0.65, anchor=CENTER)
+        
+        # Confirm Password
+        self.signup_confirm_label = Label(self.window, text="Confirm Password: ")
+        self.signup_confirm_label.place(relx=0.5, rely=0.7, anchor=CENTER)
+        self.signup_confirm_entry = Entry(self.window, show="*")
+        self.signup_confirm_entry.place(relx=0.5, rely=0.75, anchor=CENTER)
+        
+        # Sign Up Button
+        self.signup_button = Button(self.window, text="Sign Up", command=self.sign_up, bg="#70e000")
+        self.signup_button.place(relx=0.5, rely=0.85, anchor=CENTER)
+        
+    def sign_up(self):
+        username = self.signup_username_entry.get()
+        password = self.signup_password_entry.get()
+        confirm_password = self.signup_confirm_entry.get()
+        
+        # Check if username meets the length requirements
+        if len(username) < 3 or len(username) > 25:
             CustomMessageBox(self.window, "Error", "Username must be between 3 and 25 characters.")
             return
         
-        #To check if password meets the length requirements
+        # Check if password meets the length requirements
         if len(password) < 5 or len(password) > 20:
             CustomMessageBox(self.window, "Error", "Password must be between 5 and 20 characters.")
             return
+        
+        # Check if passwords match
+        if password != confirm_password:
+            CustomMessageBox(self.window, "Error", "Passwords do not match.")
+            return
+        
+        # Save the new user's credentials (for simplicity, using a dictionary here)
+        self.users = {}
+        if username in self.users:
+            CustomMessageBox(self.window, "Error", "Username already exists.")
+        else:
+            self.users[username] = password
+            CustomMessageBox(self.window, "Success", "Account created successfully!")
+            self.show_login_interface()
+        
+    def login(self):
+        username = self.username_entry.get()
+        password = self.password_entry.get()
+        
+        # Check if username meets the length requirements
+        if len(username) < 3 or len(username) > 25:
+            CustomMessageBox(self.window, "Error", "Username must be between 3 and 25 characters.")
+            return
+        
+        # Check if password meets the length requirements
+        if len(password) < 5 or len(password) > 20:
+            CustomMessageBox(self.window, "Error", "Password must be between 5 and 20 characters.")
+            return
+        
+        # Authenticate user
+        if username in self.users and self.users[username] == password:
+            print("Username: ", username)
+            print("Password: ", password)
             
-        print("Username: ", username)
-        print("Password: ", password)
+            # Hide login widgets
+            self.username_label.place_forget()
+            self.username_entry.place_forget()
+            self.password_label.place_forget()
+            self.password_entry.place_forget()
+            self.login_button.place_forget()
             
-    
-        #Hide login widgets
-        self.username_label.place_forget()
-        self.username_entry.place_forget()
-        self.password_label.place_forget()
-        self.password_entry.place_forget()
-        self.login_button.place_forget()
-
-        #Create a loading bar
-        self.loading_bar = Progressbar(self.window, length=250, mode='indeterminate')
-        self.loading_bar.place(relx=0.5, rely=0.5, anchor=CENTER)
-
-        #Show loading bar
-        self.loading_bar.start()
-
-        #Simulate delay 
-        self.window.after(500, self.show_main_page)
-
+            # Create a loading bar
+            self.loading_bar = Progressbar(self.window, length=250, mode='indeterminate')
+            self.loading_bar.place(relx=0.5, rely=0.5, anchor=CENTER)
+            
+            # Show loading bar
+            self.loading_bar.start()
+            
+            # Simulate delay 
+            self.window.after(500, self.show_main_page)
+        else:
+            CustomMessageBox(self.window, "Error", "Invalid username or password.")
+            
     def show_main_page(self):
-        #hide loading bar
+        # Hide loading bar
         self.loading_bar.stop()
         self.loading_bar.place_forget()
-
+        
         ####### MAIN PAGE #######
 
         #Resize and move the logo to left corner
