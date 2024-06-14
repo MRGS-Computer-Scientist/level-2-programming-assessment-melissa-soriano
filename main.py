@@ -37,6 +37,20 @@ class App():
         self.password_label.place(relx=0.5, rely=0.6, anchor=CENTER)
         self.password_entry = Entry(self.window, show="*")
         self.password_entry.place(relx=0.5, rely=0.65, anchor=CENTER)
+        def show_hide():
+            if self.show_hide_button['text'] == 'Show':
+                self.password_entry.config(show='')
+                self.show_hide_button.config(text="Hide")
+            else:
+                self.password_entry.config(show='*')
+                self.show_hide_button.config(text="Show")
+
+
+        self.show_hide_button = Button(self.window, text="Show", command=show_hide, bg="#81c3d7")
+        self.show_hide_button.place(relx=0.63, rely=0.65, anchor=CENTER)
+
+
+        
 
         #Confirm Password
         self.confirm_label = Label(self.window, text="Confirm Password: ")
