@@ -57,7 +57,16 @@ class App():
         self.confirm_label.place(relx=0.5, rely=0.7, anchor=CENTER)
         self.confirm_entry = Entry(self.window, show="*")
         self.confirm_entry.place(relx=0.5, rely=0.75, anchor=CENTER)
-        
+        def confirm_show_hide():
+            if self.confirm_show_hide_button['text'] == 'Show':
+                self.confirm_entry.config(show='')
+                self.confirm_show_hide_button.config(text='Hide')
+            else:
+                self.confirm_entry.config(show='*')
+                self.confirm_show_hide_button.config(text="Show")
+
+        self.confirm_show_hide_button = Button(self.window, text="Show", command=confirm_show_hide, bg="#81c3d7")
+        self.confirm_show_hide_button.place(relx=0.63, rely=0.75, anchor=CENTER)
         #Login Button
         self.login_button = Button(self.window,text="ENTER", command=self.login, bg="#70e000")
         self.login_button.place(relx=0.5, rely=0.85, anchor=CENTER)
