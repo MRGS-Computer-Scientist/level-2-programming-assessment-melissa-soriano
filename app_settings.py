@@ -1,6 +1,7 @@
 from email import message
-from tkinter import NW
-from tkinter import Toplevel, Label, Button
+from tkinter import CENTER, NW
+from tkinter.ttk import Progressbar
+from tkinter import Toplevel, Label, Button, Entry
 
 
 class CustomMessageBox(Toplevel):
@@ -49,7 +50,63 @@ def hide_track_widgets(app):
       app.transaction_label.place_forget()
       app.transactions_list.place_forget()
       app.exit_button.place_forget()
+
+def sign_up(app):
+      username = app.signup_username_entry.get()
+      password = app.signup_password_entry.get()
+      confirm_password = app.signup_confirm_entry.get()
       
+      if len(username) < 3 or len(username) > 25:
+            CustomMessageBox(app.window, "Error", "Username must be between 3 and 25 characters.")
+            return
+      
+      if len(password) < 5 or len(password) > 20:
+            CustomMessageBox(app.window, "Error", "Password must be between 5 and 20 characters.")
+            return
+      
+      if password != confirm_password:
+            CustomMessageBox(app.window, "Error", "Password do not match.")
+            return
+      
+      app.user = {}
+      if username in app.users:
+            CustomMessageBox(app.window, "Error", "Username already exists.")
+      else:
+            app.users[username] = password
+            CustomMessageBox(app.window, "Success", "Account created successfully!")
+            app.login()
+
+def Login(app):
+      username = app.username_entry.get()
+      password = app.password_entry.get()
+
+      if len(username) < 3 or len(username) > 25:
+            CustomMessageBox(app.window, "Error", "Username must be between 3 and 25 characters.")
+            return
+
+      if len(password) < 5 or len(password) >20:
+            CustomMessageBox(app.window, "Error", "Password must be between 5 and 20 characters.")
+            return
+
+      if username in app.users and app.users[username] == password:
+            print("Username: ", username)
+            print("Password: ", password)
+
+            app.username_label.place_forget()
+            app.username_entry.place_forget()
+            app.password_entry.place_forget()
+            app.login_button.place_forget()
+
+            app.loading_bar = Progressbar(app.window, length=250, mode='indeterminate')
+            app.loading_bar.place(relx=0.5, rely=0.5, anchor=CENTER)
+
+            app.loading_bar.start()
+            app.window.after(500, app.show_main_page)
+      
+      else:
+            CustomMessageBox(app.window, "Error", "Invalid username or password.")
+            
+            
 def place_logo(self):
         pass
         

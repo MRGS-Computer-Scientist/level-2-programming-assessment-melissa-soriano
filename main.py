@@ -359,7 +359,7 @@ class App():
             self.transaction_label.place(relx=0.5, rely=0.2, anchor=CENTER)
 
             #Placeholder for transactions       
-            self.transactions_list = Listbox(self.window, font=("Arial", 20))
+            self.transactions_list = Listbox(self.window, font=("Arial", 20), bg="#c0c0c0")
             self.transactions_list.place(relx=0.5, rely=0.6, anchor=CENTER)
 
             #Exit button
