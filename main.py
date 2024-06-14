@@ -161,7 +161,7 @@ class App():
         # Hide loading bar
         self.loading_bar.stop()
         self.loading_bar.place_forget()
-        
+
         ####### MAIN PAGE #######
 
         #Resize and move the logo to left corner
