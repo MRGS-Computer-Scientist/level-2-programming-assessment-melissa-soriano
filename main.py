@@ -205,6 +205,10 @@ class App():
         #Update the balance message
         balance_message = "Your balance is $" + str(self.balance)
         self.balance_label.config(text=balance_message)
+
+        #Clear the entry field
+        self.allowance_entry.delete(0, END)
+
         #show a message bow to confirm the allowance was added
         CustomMessageBox(self.window, "Allowance Added", "Allowance successfully added!")
 
@@ -261,7 +265,7 @@ class App():
         #Codes to update the savings and transactions list
         #Add the savings to the currect savings
         self.savings += savings
-        self.transactions.append(f"Savings: +={savings}")
+        self.transactions.append(f"Savings: +{savings}")
 
         #Update the savings message
         current_saving_message = "Your current savings is $" + str(self.savings)
