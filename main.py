@@ -112,7 +112,9 @@ class App():
         self.confirm_label.place_forget()
         self.confirm_entry.place_forget()
         self.login_button.place_forget()
-
+        self.confirm_show_hide_button.place_forget()
+        self.show_hide_button.place_forget()
+        
         #Create a loading bar
         self.loading_bar = Progressbar(self.window, length=250, mode='indeterminate')
         self.loading_bar.place(relx=0.5, rely=0.5, anchor=CENTER)
