@@ -60,6 +60,7 @@ class App():
     def login(self):
         username = self.username_entry.get()
         password = self.password_entry.get()
+        confirm = self.confirm_entry.get()
 
         #To check if the username meets the length requirements
         if len(username)< 3 or len(username)> 25:
@@ -70,16 +71,23 @@ class App():
         if len(password) < 5 or len(password) > 20:
             CustomMessageBox(self.window, "Error", "Password must be between 5 and 20 characters.")
             return
-            
+        
+        #To check if confirm password match the password 
+        if password != confirm:
+            CustomMessageBox(self.window, "Error", "Passwords do not match.")
+            return
+        
         print("Username: ", username)
         print("Password: ", password)
-            
+        
     
         #Hide login widgets
         self.username_label.place_forget()
         self.username_entry.place_forget()
         self.password_label.place_forget()
         self.password_entry.place_forget()
+        self.confirm_label.place_forget()
+        self.confirm_entry.place_forget()
         self.login_button.place_forget()
 
         #Create a loading bar
