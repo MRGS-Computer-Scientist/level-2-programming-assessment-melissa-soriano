@@ -8,7 +8,6 @@ class CustomMessageBox(Toplevel):
       def __init__(self, parent, title, message):
             super().__init__(parent)
             self.title(title)
-            self.geometry("500x150")
             self.resizable(False, False)
 
             label = Label(self, text=message, padx=20, pady=10, font=("Great Vibes", 15))

@@ -2,6 +2,9 @@ from tkinter import*
 from app_settings import hide_main_page_widgets, hide_enter_allowance_widgets, CustomMessageBox, hide_enter_savings_widgets, hide_expense_widgets, hide_track_widgets
 from tkinter.ttk import Progressbar
 from PIL import ImageTk, Image # type: ignore #Import ImageTk and Image from PIL
+import json
+import os
+from tkinter import messagebox
 
 class App():
     
@@ -20,7 +23,7 @@ class App():
         # Create a label for the background image
         bg_label = Label(self.window, image=self.photo)
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
-         
+        
         #Logo   
         logo_image = PhotoImage(file="Images/Logo.png")
         self.logo_label = Label(self.window, image=logo_image, bg="white")
@@ -79,7 +82,7 @@ class App():
         self.transactions = []
 
         self.window.mainloop()
-    #Function to print username and password
+#Function to print username and password
     def login(self):
         username = self.username_entry.get()
         password = self.password_entry.get()
@@ -100,8 +103,9 @@ class App():
             CustomMessageBox(self.window, "Error", "Passwords do not match.")
             return
         
-        print("Username: ", username)
-        print("Password: ", password)
+        self.username = username
+        self.password = password
+        self.load_user_data()
         
     
         #Hide login widgets
@@ -124,6 +128,45 @@ class App():
 
         #Simulate delay 
         self.window.after(500, self.show_main_page)
+
+    def load_user_data(self):
+        filename = "accounts.txt"
+        if os.path.exists(filename):
+            with open(filename, 'r') as f:
+                try:
+                    accounts = json.load(f)
+                except json.JSONDecodeError:
+                    accounts = {}
+            
+            user_data = accounts.get(self.username, None)
+            if user_data:
+                self.balance = user_data.get('balance', 0)
+                self.savings = user_data.get('savings', 0)
+                self.transactions = user_data.get('transactions', [])
+            else:
+                CustomMessageBox(self.window, "Info", "No existing account found. A new account will be created.")
+        else:
+            CustomMessageBox(self.window, "Info", "No existing account found. A new account will be created.")
+    
+    def save_user_data(self):
+        filename = "accounts.txt"
+        if os.path.exists(filename):
+            with open(filename, 'r') as f:
+                try:
+                    accounts = json.load(f)
+                except json.JSONDecodeError:
+                    accounts = {}
+        else:
+            accounts = {}
+        
+        accounts[self.username] = {
+            'balance': self.balance,
+            'savings': self.savings,
+            'transactions': self.transactions
+        }
+
+        with open(filename, 'w') as f:
+            json.dump(accounts, f)
 
     def show_main_page(self):
         #hide loading bar
@@ -431,6 +474,7 @@ class App():
        cancel_button.pack(side=RIGHT, padx=10)
 
     def confirm_logout(self, top):
+        self.save_user_data()
         top.destroy()
         self.window.destroy()
     
