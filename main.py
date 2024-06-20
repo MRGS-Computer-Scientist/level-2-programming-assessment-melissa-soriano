@@ -106,8 +106,40 @@ class App():
         self.username = username
         self.password = password
         self.load_user_data()
-        
     
+    
+    
+    def load_user_data(self):
+        filename = "accounts.txt"
+        if os.path.exists(filename):
+            with open(filename, 'r') as f:
+                try:
+                    accounts = json.load(f)
+                except json.JSONDecodeError:
+                    accounts = {}
+            
+            user_data = accounts.get(self.username)
+            if user_data:
+                saved_password = user_data.get('password')
+                if saved_password != self.password:
+                    CustomMessageBox(self.window, "Error", "Incorrect password.")
+                    return
+                #Mask the password
+                user_data['password'] = '*' * len(saved_password)
+                self.balance = user_data.get('balance', 0)
+                self.savings = user_data.get('savings', 0)
+                self.transactions = user_data.get('transactions', [])
+            else:
+                CustomMessageBox(self.window, "Info", "No existing account found. A new account will be created.")
+        else:
+            CustomMessageBox(self.window, "Info", "No existing account found. A new account will be created.")
+            accounts = {}
+
+        #Save new user data
+        accounts[self.username] = user_data
+        with open(filename, 'w') as f:
+            json.dump(accounts, f)
+
         #Hide login widgets
         self.username_label.place_forget()
         self.username_entry.place_forget()
@@ -129,25 +161,8 @@ class App():
         #Simulate delay 
         self.window.after(500, self.show_main_page)
 
-    def load_user_data(self):
-        filename = "accounts.txt"
-        if os.path.exists(filename):
-            with open(filename, 'r') as f:
-                try:
-                    accounts = json.load(f)
-                except json.JSONDecodeError:
-                    accounts = {}
-            
-            user_data = accounts.get(self.username, None)
-            if user_data:
-                self.balance = user_data.get('balance', 0)
-                self.savings = user_data.get('savings', 0)
-                self.transactions = user_data.get('transactions', [])
-            else:
-                CustomMessageBox(self.window, "Info", "No existing account found. A new account will be created.")
-        else:
-            CustomMessageBox(self.window, "Info", "No existing account found. A new account will be created.")
     
+            
     def save_user_data(self):
         filename = "accounts.txt"
         if os.path.exists(filename):
@@ -158,12 +173,15 @@ class App():
                     accounts = {}
         else:
             accounts = {}
-        
-        accounts[self.username] = {
+        #Mask the password before saving
+        user_data = {
+            'password': '*' * len(self.password),
             'balance': self.balance,
             'savings': self.savings,
             'transactions': self.transactions
         }
+        
+        accounts[self.username] = user_data
 
         with open(filename, 'w') as f:
             json.dump(accounts, f)

@@ -1,1 +1,1 @@
-{"Melissa": {"balance": 120.0, "savings": 80.0, "transactions": ["Allowance: +$200.0", "Savings: +80.0", "Expense: -$80.0"]}}
+{"Melissa": {"password": "*******", "balance": 220.0, "savings": 50.0, "transactions": ["Allowance: +$300.0", "Savings: +50.0", "Expense: -$80.0"]}}
