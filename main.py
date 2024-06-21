@@ -107,8 +107,6 @@ class App():
         self.password = password
         self.load_user_data()
     
-    
-    
     def load_user_data(self):
         filename = "accounts.txt"
         if os.path.exists(filename):
@@ -124,8 +122,9 @@ class App():
                 if saved_password != self.password:
                     CustomMessageBox(self.window, "Error", "Incorrect password.")
                     return
+
                 #Mask the password
-                user_data['password'] = '*' * len(saved_password)
+                user_data['password'] = saved_password
                 self.balance = user_data.get('balance', 0)
                 self.savings = user_data.get('savings', 0)
                 self.transactions = user_data.get('transactions', [])
@@ -165,26 +164,46 @@ class App():
             
     def save_user_data(self):
         filename = "accounts.txt"
-        if os.path.exists(filename):
-            with open(filename, 'r') as f:
-                try:
-                    accounts = json.load(f)
-                except json.JSONDecodeError:
-                    accounts = {}
-        else:
-            accounts = {}
-        #Mask the password before saving
-        user_data = {
-            'password': '*' * len(self.password),
-            'balance': self.balance,
-            'savings': self.savings,
-            'transactions': self.transactions
-        }
-        
-        accounts[self.username] = user_data
 
+        #New user data
+        new_user_data = {
+            self.username:{
+                'password': self.password,
+                'balance': self.balance,
+                'savings': self.savings,
+                'transactions': self.transactions
+            }
+        }
+
+        #Read existing data from the file
+        existing_data = []
+        try:
+            with open(filename, 'r') as f:
+                lines = f.readlines()
+                for line in lines:
+                    if line.strip():#To check if line is empty in accounts.txt
+                        existing_data.append(json.loads(line.strip()))
+        except FileNotFoundError:
+            pass
+        
+        # Check if the user already exists and update their data
+        user_exists = False
+        for user_data in existing_data:
+            if self.username in user_data:
+                user_data[self.username] = new_user_data[self.username]
+                user_exists = True
+                break
+            
+        # If the user does not exist, add their data to the list
+        if not user_exists:
+            existing_data.append(new_user_data)
+
+        # Write all data back to the file, each user on a new line
         with open(filename, 'w') as f:
-            json.dump(accounts, f)
+            for user_data in existing_data:
+                f.write(json.dumps(user_data) + '\n')
+
+        print("User data saved successfully.")
 
     def show_main_page(self):
         #hide loading bar
