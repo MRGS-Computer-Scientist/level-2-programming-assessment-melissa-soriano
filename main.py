@@ -40,6 +40,7 @@ class App():
         self.password_label.place(relx=0.5, rely=0.6, anchor=CENTER)
         self.password_entry = Entry(self.window, show="*")
         self.password_entry.place(relx=0.5, rely=0.65, anchor=CENTER)
+        
         def show_hide():
             if self.show_hide_button['text'] == 'Show':
                 self.password_entry.config(show='')
@@ -48,18 +49,15 @@ class App():
                 self.password_entry.config(show='*')
                 self.show_hide_button.config(text="Show")
 
-
         self.show_hide_button = Button(self.window, text="Show", command=show_hide, bg="#81c3d7")
         self.show_hide_button.place(relx=0.63, rely=0.65, anchor=CENTER)
-
-
-        
 
         #Confirm Password
         self.confirm_label = Label(self.window, text="Confirm Password: ")
         self.confirm_label.place(relx=0.5, rely=0.7, anchor=CENTER)
         self.confirm_entry = Entry(self.window, show="*")
         self.confirm_entry.place(relx=0.5, rely=0.75, anchor=CENTER)
+        
         def confirm_show_hide():
             if self.confirm_show_hide_button['text'] == 'Show':
                 self.confirm_entry.config(show='')
@@ -70,6 +68,7 @@ class App():
 
         self.confirm_show_hide_button = Button(self.window, text="Show", command=confirm_show_hide, bg="#81c3d7")
         self.confirm_show_hide_button.place(relx=0.63, rely=0.75, anchor=CENTER)
+        
         #Login Button
         self.login_button = Button(self.window,text="ENTER", command=self.login, bg="#70e000")
         self.login_button.place(relx=0.5, rely=0.85, anchor=CENTER)
@@ -82,6 +81,7 @@ class App():
         self.transactions = []
 
         self.window.mainloop()
+
 #Function to print username and password
     def login(self):
         username = self.username_entry.get()
@@ -159,9 +159,7 @@ class App():
 
         #Simulate delay 
         self.window.after(500, self.show_main_page)
-
-    
-            
+  
     def save_user_data(self):
         filename = "accounts.txt"
 
@@ -274,6 +272,7 @@ class App():
         hide_main_page_widgets(self)
         
         self.show_loading()
+        
         def show_widgets():
             self.hide_loading()
             #place logo
@@ -336,6 +335,7 @@ class App():
         hide_main_page_widgets(self)
 
         self.show_loading()
+        
         def show_saving_widgets():
             self.hide_loading()
             #Code to place logo
@@ -401,6 +401,7 @@ class App():
         hide_main_page_widgets(self)
 
         self.show_loading()
+        
         def expense_widgets():
             self.hide_loading()
             #place logo
@@ -492,6 +493,7 @@ class App():
         #Schedule the display of the widgets  after 1 second
         self.window.after(1000, show_track_widgets)
 
+#Code for logout
     def logout(self):
        top = Toplevel(self.window)
        top.title("Logout")
@@ -509,7 +511,8 @@ class App():
 
        cancel_button = Button(button_frame, text="Cancel", bg="red", fg="white", padx=10, pady=5, command=top.destroy)
        cancel_button.pack(side=RIGHT, padx=10)
-
+    
+    #Code to confirm logout
     def confirm_logout(self, top):
         self.save_user_data()
         top.destroy()
