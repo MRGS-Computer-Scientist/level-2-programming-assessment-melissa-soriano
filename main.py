@@ -90,12 +90,12 @@ class App():
 
         #To check if the username meets the length requirements
         if len(username)< 3 or len(username)> 25:
-            CustomMessageBox(self.window, "Error", "Username must be between 3 and 25 characters.")
+            CustomMessageBox(self.window, "Error", "Username must be between 3 to 25 characters.")
             return
         
         #To check if password meets the length requirements
         if len(password) < 5 or len(password) > 20:
-            CustomMessageBox(self.window, "Error", "Password must be between 5 and 20 characters.")
+            CustomMessageBox(self.window, "Error", "Password must be between 5 to 20 characters.")
             return
         
         #To check if confirm password match the password 
